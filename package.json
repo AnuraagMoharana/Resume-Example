@@ -7,6 +7,6 @@
     "build:pdf": "node scripts/build-pdf.js"
   },
   "dependencies": {
-    "puppeteer": "^24.43.1"
+    "puppeteer": "^25.11.0"
   }
 }

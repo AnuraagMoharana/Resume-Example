@@ -1,0 +1,44 @@
+name: Build ATS Resume PDF
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build resume PDF
+        run: npm run build:pdf
+
+      - name: Verify PDF
+        run: |
+          test -f resume.pdf
+          test -s resume.pdf
+          file resume.pdf
+
+      - name: Upload ATS resume artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: anuraag-moharana-resume
+          path: resume.pdf
+          if-no-files-found: error
+          retention-days: 30

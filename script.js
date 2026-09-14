@@ -3,7 +3,6 @@
   const menuToggle = document.querySelector('.menu-toggle');
   const nav = document.querySelector('#primary-nav');
   const toast = document.querySelector('[data-toast]');
-  const copyButton = document.querySelector('[data-copy-email]');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const updateHeader = () => {
@@ -18,12 +17,14 @@
       menuToggle.setAttribute('aria-label', 'Open navigation');
       nav.classList.remove('open');
     };
+
     menuToggle.addEventListener('click', () => {
       const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
       menuToggle.setAttribute('aria-expanded', String(!isOpen));
       menuToggle.setAttribute('aria-label', isOpen ? 'Open navigation' : 'Close navigation');
       nav.classList.toggle('open', !isOpen);
     });
+
     nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') closeMenu();
@@ -36,23 +37,6 @@
     toast.classList.add('show');
     window.setTimeout(() => toast.classList.remove('show'), 2400);
   };
-
-  if (copyButton) {
-    copyButton.addEventListener('click', async () => {
-      const email = copyButton.dataset.copyEmail;
-      try {
-        await navigator.clipboard.writeText(email);
-        copyButton.querySelector('.copy-label').textContent = 'Email copied';
-        showToast('Email copied to clipboard');
-      } catch (error) {
-        showToast(`Email: ${email}`);
-      }
-      window.setTimeout(() => {
-        const label = copyButton.querySelector('.copy-label');
-        if (label) label.textContent = 'Copy email';
-      }, 2400);
-    });
-  }
 
   const revealItems = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window && !reduceMotion) {
@@ -67,5 +51,15 @@
     revealItems.forEach((item) => observer.observe(item));
   } else {
     revealItems.forEach((item) => item.classList.add('is-visible'));
+  }
+
+  if (!reduceMotion) {
+    const scene = document.querySelector('.scene');
+    window.addEventListener('pointermove', (event) => {
+      if (!scene || window.innerWidth < 900) return;
+      const x = (event.clientX / window.innerWidth - .5) * 2;
+      const y = (event.clientY / window.innerHeight - .5) * 2;
+      scene.style.transform = `translate3d(${x * -5}px, ${y * -3}px, 0)`;
+    }, { passive: true });
   }
 })();

@@ -1,1 +1,0 @@
-Repository cleanup is complete; generated dependencies such as node_modules are intentionally excluded from version control.

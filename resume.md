@@ -1,8 +1,8 @@
-# Avery Rowan
+# Anuraag Moharana
 
 ## Frontend Engineer
 
-New York / Remote · hello@averyrowan.dev · github.com · linkedin.com
+New York / Remote · anuraagm178@gmail.com · github.com · linkedin.com
 
 ### Profile
 Product-minded frontend engineer building fast, accessible digital products with React, TypeScript, and systems thinking.

@@ -1,5 +1,7 @@
 ﻿# Resume-Example
  Click on https://anuraagmoharana.github.io/Resume-Example/
+
+ 
 I have a GitHub repository named `Resume-Example` that hosts my developer resume. I want to upgrade the repository structure, presentation, and automation to make it production-ready and recruiter-focused.
 
 Please generate all necessary markdown files, directory structure, and workflow code based on these requirements:
